@@ -1,0 +1,147 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Carolina",
+      "lastName": "Labastida",
+      "email": "carolinalabastida4@gmail.com",
+      "password": "123456",
+      "token": "XNJSJXNDECU62N243JK42JN24JJ24",
+      "role": "admin"
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Josué Alonso",
+      "lastName": "Camacho Montijo",
+      "email": "jcamacho@gmail.com",
+      "phone": "8338925678",
+      "birthDate": "2000-02-15",
+      "gender": "M"
+    },
+    {
+      "id": 2,
+      "name": "Nancy",
+      "lastName": "Ruíz Domínguez",
+      "email": "NRuiz_dom@hotmail.com",
+      "phone": "2417895648",
+      "birthDate": "2001-01-03",
+      "gender": "F"
+    },
+    {
+      "name": "Oscar Manuel",
+      "lastName": "Mendoza Rosas",
+      "email": "oscar.mendoza@gmail.com",
+      "phone": "8331456789",
+      "birthDate": "1999-02-15",
+      "gender": "M",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Laura Andrea",
+      "lastName": "Almanza García",
+      "email": "lalmanza23@hotmail.com",
+      "phone": "8336728907",
+      "birthDate": "1977-06-02",
+      "gender": "F"
+    },
+    {
+      "id": 5,
+      "name": "Fernanda",
+      "lastName": "Velázquez Tovar",
+      "email": "v.Fernanda@gmail.com",
+      "phone": "7246893789",
+      "birthDate": "2000-03-03",
+      "gender": "F"
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Java",
+      "startDate": "2023-05-15",
+      "endDate": "2023-07-15",
+      "time": "14:00 - 16:00"
+    },
+    {
+      "id": 2,
+      "name": "C#",
+      "startDate": "2023-07-03",
+      "endDate": "2023-09-03",
+      "time": "10:00 - 12:00"
+    },
+    {
+      "id": 3,
+      "name": "HTML",
+      "startDate": "2023-09-25",
+      "endDate": "2023-11-25",
+      "time": "12:00 - 14:00"
+    },
+    {
+      "name": "Angular",
+      "startDate": "2023-06-01",
+      "endDate": "2023-08-01",
+      "time": "8:00 - 10:00",
+      "id": 4
+    },
+    {
+      "name": "PHP",
+      "startDate": "2023-05-22T06:00:00.000Z",
+      "endDate": "2023-05-24T06:00:00.000Z",
+      "time": "14:00 - 16:00",
+      "id": 5
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "courseId": 2,
+      "studentId": 3,
+      "date": "2023-03-27"
+    },
+    {
+      "id": 2,
+      "courseId": 1,
+      "studentId": 5,
+      "date": "2023-02-03"
+    },
+    {
+      "id": 3,
+      "courseId": 3,
+      "studentId": 3,
+      "date": "2023-01-15"
+    },
+    {
+      "id": 4,
+      "courseId": 4,
+      "studentId": 1,
+      "date": "2022-11-19"
+    },
+    {
+      "id": 5,
+      "courseId": 2,
+      "studentId": 2,
+      "date": "2023-04-20"
+    },
+    {
+      "id": 6,
+      "courseId": 1,
+      "studentId": 3,
+      "date": "2023-02-25"
+    },
+    {
+      "id": 7,
+      "courseId": 2,
+      "studentId": 4,
+      "date": "2023-03-28"
+    },
+    {
+      "id": 8,
+      "courseId": 4,
+      "studentId": 5,
+      "date": "2022-03-17"
+    }
+  ]
+}

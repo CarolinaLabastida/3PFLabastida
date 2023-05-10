@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Curso</h1>
+<div class="dialog" mat-dialog-content>
+  <form [formGroup]="courseForm">
+      <div class="form-group">
+        <mat-form-field appearance="outline" class="col-12">
+          <mat-label>Nombre</mat-label>
+          <input [formControl]="nameControl" matInput
+          placeholder="Ingrese el nombre del curso">
+          <mat-icon matSuffix>edit</mat-icon>
+          <mat-error *ngFor="let error of nameControl.errors | keyvalue">
+            {{ error | controlErrorMessages  }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="row">
+      <div class="form-group col-6">
+        <mat-form-field appearance="outline" class="col-12">
+            <mat-label>Fecha inicio a fin</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate [formControl]="startDateControl" placeholder="Fecha inicio">
+              <input matEndDate [formControl]="endDateControl" placeholder="Fecha fin">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          
+            <mat-error *ngFor="let error of startDateControl.errors | keyvalue">
+                {{ error | controlErrorMessages  }}
+              </mat-error>
+              <mat-error *ngFor="let error of endDateControl.errors | keyvalue">
+                {{ error | controlErrorMessages  }}
+              </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="form-group col-6">
+        <mat-form-field appearance="outline" class="col-12">
+          <mat-label>Horario</mat-label>
+          <mat-select [formControl]="timeControl">
+            <mat-option value="">Seleccione una opción</mat-option>
+            <mat-option value="8:00 - 10:00">8:00 - 10:00</mat-option>
+            <mat-option value="10:00 - 12:00">10:00 - 12:00</mat-option>
+            <mat-option value="12:00 - 14:00">12:00 - 14:00</mat-option>
+            <mat-option value="14:00 - 16:00">14:00 - 16:00</mat-option>
+            <mat-option value="16:00 - 18:00">16:00 - 18:00</mat-option>
+            <mat-option value="18:00 - 20:00">18:00 - 20:00</mat-option>
+          </mat-select>
+          <mat-error *ngFor="let error of timeControl.errors | keyvalue">
+            {{ error | controlErrorMessages  }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions  align="end">
+  <button  mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="accent" (click)="save()" cdkFocusInitial [disabled]="courseForm.invalid">Guardar</button>
+</div>

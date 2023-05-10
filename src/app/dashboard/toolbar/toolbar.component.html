@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <button type="button" (click)="InputSideNav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Mi sistema</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button aria-label="Configuración" matTooltip="Configuración">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Cerrar sesión" matTooltip="Cerrar sesión" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>

@@ -1,0 +1,57 @@
+<div class="row pb-2">
+    <div class="col-6 mt-3">
+      <p appFontSize>Cursos</p>
+    </div>
+    <div class="col-6 text-end">
+      <button mat-fab extended color="accent" (click)="openCreateCourseDialog()">
+          <mat-icon>add</mat-icon>
+          Nuevo curso
+        </button>
+      </div>
+    </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover">
+  
+      <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element;let i = index"> 
+              <button mat-mini-fab matTooltip="Eliminar" color="warn"  (click)="removeData(element)">
+              <mat-icon>delete</mat-icon> </button>&nbsp;
+              <button mat-mini-fab matTooltip="Modificar" color="primary"  (click)="editData(element)">
+                <mat-icon>edit</mat-icon>
+            </button> &nbsp;
+            <button mat-mini-fab matTooltip="Ver más detalle" color="accent" (click)="showDetails(element.id)">
+              <mat-icon>visibility</mat-icon></button> 
+          </td>
+        </ng-container>
+  
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef> Fecha inicio </th>
+        <td mat-cell *matCellDef="let element"> {{element.startDate | date : "dd/MM/yyyy"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="endDate">
+        <th mat-header-cell *matHeaderCellDef> Fecha fin </th>
+        <td mat-cell *matCellDef="let element"> {{element.endDate | date : "dd/MM/yyyy"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef> Horario </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    
+  

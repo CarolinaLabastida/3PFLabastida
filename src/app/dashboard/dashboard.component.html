@@ -1,0 +1,21 @@
+<app-toolbar [InputSideNav]="sidenav"></app-toolbar>
+<mat-sidenav-container class="menu-container">
+    <mat-sidenav #sidenav class="menu-sidenav" mode="side"
+    [fixedInViewport]="false">
+    <div id="admin-sidebar">
+        <mat-nav-list>
+            <a
+            [routerLink]="item.path" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+              mat-list-item
+              *ngFor="let item of items"
+            >
+              <mat-icon *ngIf="item.icon" class="menuIcons">{{ item.icon }}</mat-icon>  {{ item.title }}
+            </a>
+        </mat-nav-list>
+  </div> 
+    </mat-sidenav>
+    <div class="menu-sidenav-content">
+        <router-outlet></router-outlet>
+          </div>
+        
+  </mat-sidenav-container>

@@ -1,0 +1,69 @@
+
+  <mat-card class="example-card">
+      <mat-card-header>
+        <h2>Detalles</h2>
+      </mat-card-header>
+     <mat-card-content>
+      <div class="row row col-12 col-lg-6">
+          <div class="col-12 col-lg-6 element">
+              <mat-card-title>
+                  <mat-icon color="primary">collections_bookmark</mat-icon>
+                  {{course?.name}}</mat-card-title>
+                <mat-card-subtitle>Curso</mat-card-subtitle>
+          </div>
+          <div class="col-12 col-lg-6 element">
+              <mat-card-title>
+                  <mat-icon color="primary">schedule</mat-icon>
+                  {{course?.time}}</mat-card-title>
+                <mat-card-subtitle>Horario</mat-card-subtitle>
+          </div>
+      </div>
+      <div class="row row col-12 col-lg-6">
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">calendar_month</mat-icon>
+                {{course?.startDate | date : "dd/MM/yyyy"}}</mat-card-title>
+              <mat-card-subtitle>Fecha inicio</mat-card-subtitle>
+        </div>
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">calendar_month</mat-icon>
+                {{course?.endDate | date : "dd/MM/yyyy"}}</mat-card-title>
+              <mat-card-subtitle>Fecha fin</mat-card-subtitle>
+        </div>
+    </div>
+    <br>
+    <div class="row pb-2">
+        <div class="col-6 mt-3">
+          <p appFontSize>Alumnos inscritos</p>
+        </div>
+        </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover">
+      
+          <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element"> 
+                  <button mat-mini-fab matTooltip="Eliminar" color="warn"  (click)="removeData(element.id)">
+                  <mat-icon>delete</mat-icon> </button>
+              </td>
+            </ng-container>
+      
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.studentId}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="student">
+            <th mat-header-cell *matHeaderCellDef> Alumno</th>
+            <td mat-cell *matCellDef="let element"> {{element.studentId | descriptions:'student'}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+
+    
+    
+  

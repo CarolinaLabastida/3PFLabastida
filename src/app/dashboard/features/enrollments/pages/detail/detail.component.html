@@ -1,0 +1,21 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <h2>Detalles</h2>
+    </mat-card-header>
+   <mat-card-content>
+    <div class="row col-12 col-lg-6">
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">collections_bookmark</mat-icon>
+                {{enrollment?.courseId | descriptions:'course'}}</mat-card-title>
+              <mat-card-subtitle>Curso</mat-card-subtitle>
+        </div>
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">person</mat-icon>
+                {{enrollment?.studentId | descriptions:'student'}}</mat-card-title>
+              <mat-card-subtitle>Alumno(a)</mat-card-subtitle>
+        </div>
+    </div>
+    </mat-card-content>
+  </mat-card>
