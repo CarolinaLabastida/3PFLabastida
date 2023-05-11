@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Course, formDataCourse } from '../models/course';
-import { BehaviorSubject, Observable, take, map } from 'rxjs';
+import { BehaviorSubject, Observable, take, map, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import { Student } from '../../students/models/student';
@@ -14,8 +14,11 @@ export class CourseService {
     null
   );
 
-  constructor(private httpClient: HttpClient){
+  private course$ = new BehaviorSubject<Course | null>(
+null
+  );
 
+  constructor(private httpClient: HttpClient){
   }
 
   getCourses(): Observable<Course[] | null> {
@@ -35,17 +38,26 @@ export class CourseService {
   }
 
   getCourseById(id: number): Observable<Course | null>{
-    return this.httpClient.get<Course[]>(
+    this.httpClient.get<Course[]>(
       `${environment.apiBaseUrl}/courses`, 
       {
         params: {
           id: id
         }
       }
-    ).pipe(
-      map((courses) => courses[0])
-    )
+    ).subscribe({
+      next: (courses) => {
+        this.course$.next(courses[0]);
+      },
+      complete: () => {},
+      error: () => {
+        return 'Ocurrió un error al obtener la información';
+      }
+    })
+
+    return this.course$.asObservable();
   }
+  
 
   createCourse(newCourse: formDataCourse): void{
     this.httpClient.post<Student[]>(

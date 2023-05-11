@@ -1,23 +1,22 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Student } from './models/student';
-import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { StudentService } from './services/student.service';
-import { NotificationsService } from '../../../core/services/notifications.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/core/models/user';
+import { UserService } from './services/user.service';
+import { NotificationsService } from 'src/app/core/services/notifications.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CreateUpdateComponent } from './dialogs/create-update/create-update.component';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss']
 })
-export class StudentsComponent implements OnInit, OnDestroy {
-  dataSource = new MatTableDataSource<Student>();
+export class UsersComponent implements OnInit, OnDestroy {
+  dataSource = new MatTableDataSource<User>();
   subscriptionRef: Subscription | null;
-  role;
 
   displayedColumns: string[] = [
     'actions',
@@ -25,28 +24,27 @@ export class StudentsComponent implements OnInit, OnDestroy {
     'fullName',
     'email',
     'phone',
-    'birthDate',
-    'gender',
+    'role',
   ];
 
   constructor(
     public dialog: MatDialog,
-    private studentService: StudentService,
+    private userService: UserService,
     private notificationsService: NotificationsService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.role = localStorage.getItem('role');
+
     this.subscriptionRef = this.notificationsService.showMessage().subscribe((text) => {
       Swal.fire( text, '', 'success');
     })
   }
 
   ngOnInit(): void {
-    this.studentService.getStudents() 
+    this.userService.getUsers() 
     .subscribe({
-      next: (students) => {
-        if(students) this.dataSource.data = students
+      next: (users) => {
+        if(users) this.dataSource.data = users
       },
       error: (e) =>  Swal.fire( e, '', 'error'),
     })
@@ -57,37 +55,37 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.subscriptionRef?.unsubscribe();
   }
 
-  removeData(student: Student) {
-    this.studentService.deleteStudent(student.id);
-    this.notificationsService.createMessage(`${student.name} ha sido eliminado(a)`);
+  removeData(user: User) {
+    this.userService.deleteUser(user.id);
+    this.notificationsService.createMessage(`${user.name} ha sido eliminado(a)`);
   }
 
-  openCreateStudentDialog(): void {
+  openCreateUserDialog(): void {
     const dialogRef = this.dialog.open(CreateUpdateComponent);
     dialogRef.afterClosed().subscribe((formData) => {
       if (formData) {
-        this.studentService.createStudent(formData);
+        this.userService.createUser(formData);
         this.notificationsService.createMessage(`${formData.name} ha sido sido creado(a)`);
       }
     });
   }
 
-  editData(student: Student): void {
+  editData(user: User): void {
     const dialogRef = this.dialog.open(CreateUpdateComponent, {
       data: {
-        student
+        user
       },
     });
     dialogRef.afterClosed().subscribe((formData) => {
       if (formData) {
-        this.studentService.editStudent(student.id, formData)
+        this.userService.editUser(user.id, formData, user.token)
         this.notificationsService.createMessage(`${formData.name} ha sido modificado(a)`);
       }
     });
   }
 
-  showDetails(studentId: number): void {
-    this.router.navigate([studentId], {
+  showDetails(userId: number): void {
+    this.router.navigate([userId], {
       relativeTo: this.activatedRoute
     })
   }

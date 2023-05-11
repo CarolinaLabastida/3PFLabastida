@@ -1,13 +1,24 @@
 {
   "users": [
     {
-      "id": 1,
       "name": "Carolina",
       "lastName": "Labastida",
-      "email": "carolinalabastida4@gmail.com",
+      "email": "admin@email.com",
+      "phone": "8331234567",
+      "role": "Administrador",
       "password": "123456",
-      "token": "XNJSJXNDECU62N243JK42JN24JJ24",
-      "role": "admin"
+      "token": "67674d30-96b8-323d-0823-ce6d4c4f7931",
+      "id": 1
+    },
+    {
+      "name": "Silvia",
+      "lastName": "Robles",
+      "email": "user@email.com",
+      "phone": "",
+      "role": "Usuario",
+      "password": "1234567",
+      "token": "af789503-d06e-6370-970a-e07dcf48fdc6",
+      "id": 2
     }
   ],
   "students": [

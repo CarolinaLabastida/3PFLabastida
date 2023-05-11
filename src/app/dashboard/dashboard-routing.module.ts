@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
+import { AdminAccessGuard } from '../auth/guards/admin-access.guard';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'inscripciones',
     loadChildren: () => import('./features/enrollments/enrollments.module').then((m) => m.EnrollmentsModule)
+  },
+  {
+    path: 'usuarios',
+    canActivate: [AdminAccessGuard],
+    loadChildren: () => import('./features/users/users.module').then((m) => m.UsersModule)
   }
 ];
 

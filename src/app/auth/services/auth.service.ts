@@ -35,6 +35,7 @@ export class AuthService {
         const userAuth = users[0];
         if(userAuth) {
           localStorage.setItem('token', userAuth.token)
+          localStorage.setItem('role', userAuth.role)
           this.authUser$.next(userAuth)
           this.router.navigate(['sistema','inicio'])
         }else{
@@ -46,6 +47,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
     this.authUser$.next(null);
     this.router.navigate(['auth']);
   }
@@ -59,7 +61,6 @@ export class AuthService {
       map((users) => {
         const userAuth = users[0];
         if(userAuth){
-          localStorage.setItem('token', userAuth.token)
           this.authUser$.next(userAuth);
         }
         return !!userAuth;

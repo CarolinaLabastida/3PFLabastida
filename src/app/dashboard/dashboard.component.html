@@ -5,12 +5,18 @@
     <div id="admin-sidebar">
         <mat-nav-list>
             <a
-            [routerLink]="item.path" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}"
+            [routerLink]="item.path" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:false}"
               mat-list-item
-              *ngFor="let item of items"
+              *ngFor="let item of navItems"
             >
               <mat-icon *ngIf="item.icon" class="menuIcons">{{ item.icon }}</mat-icon>  {{ item.title }}
             </a>
+            <mat-divider></mat-divider>
+            <div class="col-12 mt-3 text-center">
+              <button mat-stroked-button (click)="logout()">
+                <mat-icon>logout</mat-icon> Cerrar sesión
+              </button>
+            </div>
         </mat-nav-list>
   </div> 
     </mat-sidenav>

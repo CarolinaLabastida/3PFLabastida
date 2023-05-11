@@ -4,6 +4,7 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagesPipe } from './pipes/control-error-messages.pipe';
 import { FontSizeDirective } from './directives/font-size.directive';
 import { DescriptionsPipe } from './pipes/descriptions.pipe';
+import { ActivatedRoutePipe } from './pipes/activated-route.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { DescriptionsPipe } from './pipes/descriptions.pipe';
     FullNamePipe,
     ControlErrorMessagesPipe,
     FontSizeDirective,
-    DescriptionsPipe
+    DescriptionsPipe,
+    ActivatedRoutePipe
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { DescriptionsPipe } from './pipes/descriptions.pipe';
     FullNamePipe,
     ControlErrorMessagesPipe,
     FontSizeDirective,
-    DescriptionsPipe
+    DescriptionsPipe,
+    ActivatedRoutePipe
   ]
 })
 export class SharedModule { }

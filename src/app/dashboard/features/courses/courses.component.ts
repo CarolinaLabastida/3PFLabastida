@@ -17,6 +17,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CoursesComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Course>();
   subscriptionRef: Subscription | null;
+  role;
 
   displayedColumns: string[] = [
     'actions',
@@ -34,6 +35,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ){
+    this.role = localStorage.getItem('role');
+
     this.subscriptionRef = this.notificationsService.showMessage()
     .subscribe((text) => {
       Swal.fire(text, '', 'success');
@@ -43,7 +46,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.courseService.getCourses()
     .subscribe({
-      next: (courses) => {if (courses) this.dataSource.data = courses},
+      next: (courses) => {if (courses)this.dataSource.data = courses},
       error: (e) => console.error(e),
     })
   }
@@ -75,7 +78,8 @@ export class CoursesComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((formData) => {
       if(formData) {
-        this.courseService.editCourse(course.id,formData);
+        formData.id = course.id;
+        this.courseService.editCourse(course.id, formData);
         this.notificationsService.createMessage(`El curso ${formData.name} ha sido modificado`);
       }
     });

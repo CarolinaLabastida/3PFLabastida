@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HomeModule } from './features/home/home.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HomeModule } from './features/home/home.module';
     MatListModule,
     MatTooltipModule,
     DashboardRoutingModule,
-    HomeModule
+    HomeModule,
+    SharedModule
   ],
   exports: [
     DashboardComponent

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Course } from '../../models/course';
-import { Subject, Subscription, takeUntil } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { EnrollmentService } from '../../../enrollments/services/enrollment.service';
@@ -35,8 +35,6 @@ export class DetailComponent implements OnDestroy, OnInit {
   ){
     this.courseService.getCourseById(
       parseInt(this.activatedRoute.snapshot.params['id'])
-    ).pipe(
-      takeUntil(this.subject$)
     ).subscribe((course) => this.course = course);
 
     this.subscriptionRef = this.notificationsService.showMessage()
@@ -46,6 +44,7 @@ export class DetailComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.course);
     this.enrollmentService.getEnrollmentsByCourseId(this.course?.id??0)
     .subscribe({
       next: (enrollments) => this.dataSource.data = enrollments,

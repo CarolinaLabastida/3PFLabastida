@@ -76,7 +76,7 @@ export class EnrollmentsComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((formData) => {
       if(formData) {
-        this.enrollmentService.editEnrollment(enrollment.id, formData);
+        this.enrollmentService.editEnrollment(enrollment.id, formData, enrollment.date);
         this.notificationsService.createMessage(`La inscripción ha sido modificada`);
       }
     });

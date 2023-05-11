@@ -1,0 +1,39 @@
+
+<mat-card class="example-card">
+    <mat-card-header>
+      <h2>Detalles</h2>
+    </mat-card-header>
+   <mat-card-content>
+    <div class="row row col-12 col-lg-8">
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">person</mat-icon>
+                {{user?.name}} {{user?.lastName}}</mat-card-title>
+              <mat-card-subtitle>Usuario</mat-card-subtitle>
+        </div>
+        <div class="col-12 col-lg-6 element">
+            <mat-card-title>
+                <mat-icon color="primary">mail</mat-icon>
+                {{user?.email}}</mat-card-title>
+              <mat-card-subtitle>Correo electrónico</mat-card-subtitle>
+        </div>
+    </div>
+    <div class="row row col-12 col-lg-8">
+      <div class="col-12 col-lg-6 element">
+          <mat-card-title>
+              <mat-icon color="primary">call</mat-icon>
+              {{user?.phone}}</mat-card-title>
+            <mat-card-subtitle>Teléfono</mat-card-subtitle>
+      </div>
+      <div class="col-12 col-lg-6 element">
+        <mat-card-title>
+            <mat-icon color="primary">settings_account_box</mat-icon>
+            {{user?.role}}</mat-card-title>
+          <mat-card-subtitle>Rol</mat-card-subtitle>
+    </div>
+  </div>
+    </mat-card-content>
+  
+      
+      
+    

@@ -64,9 +64,9 @@ export class EnrollmentService {
     })
   }
 
-  editEnrollment(enrollmentId: number, modifiedEnrollment: formDataEnrollment): void{
+  editEnrollment(enrollmentId: number, modifiedEnrollment: formDataEnrollment, date: Date): void{
     this.httpClient.put<Enrollment[]>(
-      `${environment.apiBaseUrl}/enrollments/${enrollmentId}`, modifiedEnrollment
+      `${environment.apiBaseUrl}/enrollments/${enrollmentId}`, {...modifiedEnrollment, date: date}
     ).subscribe({
       next: () => {
         this.getEnrollments();
