@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Enrollment } from './models/enrollment';
+import { Enrollment, EnrollmentModel } from './models/enrollment';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentService } from './services/enrollment.service';
@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./enrollments.component.scss']
 })
 export class EnrollmentsComponent implements OnInit, OnDestroy {
-  dataSource = new MatTableDataSource<Enrollment>();
+  dataSource = new MatTableDataSource<EnrollmentModel>();
   subscriptionRef: Subscription | null;
 
   displayedColumns: string[] = [

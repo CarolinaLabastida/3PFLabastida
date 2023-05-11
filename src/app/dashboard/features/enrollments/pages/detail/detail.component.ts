@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Enrollment } from '../../models/enrollment';
+import { EnrollmentModel } from '../../models/enrollment';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { EnrollmentService } from '../../services/enrollment.service';
@@ -11,7 +11,7 @@ import { EnrollmentService } from '../../services/enrollment.service';
 })
 export class DetailComponent {
 
-  enrollment: Enrollment | undefined;
+  enrollment: EnrollmentModel | undefined;
 
   private subject$ = new Subject();
 

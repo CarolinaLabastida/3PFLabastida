@@ -7,13 +7,13 @@
         <div class="col-12 col-lg-6 element">
             <mat-card-title>
                 <mat-icon color="primary">collections_bookmark</mat-icon>
-                {{enrollment?.courseId | descriptions:'course'}}</mat-card-title>
+                {{enrollment?.course?.name}}</mat-card-title>
               <mat-card-subtitle>Curso</mat-card-subtitle>
         </div>
         <div class="col-12 col-lg-6 element">
             <mat-card-title>
                 <mat-icon color="primary">person</mat-icon>
-                {{enrollment?.studentId | descriptions:'student'}}</mat-card-title>
+                {{enrollment?.student| fullName}}</mat-card-title>
               <mat-card-subtitle>Alumno(a)</mat-card-subtitle>
         </div>
     </div>

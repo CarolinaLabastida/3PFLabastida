@@ -36,7 +36,6 @@ export class CreateUpdateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ){
     if(data){
-      console.log(data);
       const enrollmentData = data.enrollment;
       this.courseIdControl.setValue(enrollmentData.courseId);
       this.studentIdControl.setValue(enrollmentData.studentId);

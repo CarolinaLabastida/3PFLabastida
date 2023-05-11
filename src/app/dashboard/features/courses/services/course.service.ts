@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import { Student } from '../../students/models/student';
 import Swal from 'sweetalert2';
+import { EnrollmentModel } from '../../enrollments/models/enrollment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class CourseService {
     null
   );
 
-  private course$ = new BehaviorSubject<Course | null>(
-null
+  private enrollments$ = new BehaviorSubject<EnrollmentModel[] | null>(
+    null
   );
 
   constructor(private httpClient: HttpClient){
@@ -38,24 +39,16 @@ null
   }
 
   getCourseById(id: number): Observable<Course | null>{
-    this.httpClient.get<Course[]>(
-      `${environment.apiBaseUrl}/courses`, 
+    return this.httpClient.get<Course[]>( 
+      `${environment.apiBaseUrl}/courses`,
       {
         params: {
           id: id
         }
       }
-    ).subscribe({
-      next: (courses) => {
-        this.course$.next(courses[0]);
-      },
-      complete: () => {},
-      error: () => {
-        return 'Ocurrió un error al obtener la información';
-      }
-    })
-
-    return this.course$.asObservable();
+    ).pipe(
+      map((courses) => courses[0])
+    )
   }
   
 
@@ -101,5 +94,34 @@ null
     })
   }
 
+  getEnrollmentsByCourseId(id: number): Observable<EnrollmentModel[] | null> {
+    this.httpClient.get<EnrollmentModel[]>(
+      `${environment.apiBaseUrl}/enrollments?courseId=${id}&_expand=course&_expand=student`, 
+    ).subscribe({
+      next: (enrollments) => {
+        this.enrollments$.next(enrollments);
+      },
+      complete: () => {},
+      error: () => {
+        return 'Ocurrió un error al obtener la información';
+      }
+    })
+
+    return this.enrollments$.asObservable();
+  }
+
+  deleteEnrollment(enrollmentId: number, courseId: number): void {
+    this.httpClient.delete(
+      `${environment.apiBaseUrl}/enrollments/${enrollmentId}`
+    ).subscribe({
+      next: () => {
+        this.getEnrollmentsByCourseId(courseId);
+      },
+      complete: () => {},
+      error: () => {
+        Swal.fire('', 'Ocurrió un error al eliminar la inscripción', 'error')
+      }
+    })
+  }
 
 }

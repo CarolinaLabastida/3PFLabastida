@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { ControlErrorMessagesPipe } from './pipes/control-error-messages.pipe';
 import { FontSizeDirective } from './directives/font-size.directive';
-import { DescriptionsPipe } from './pipes/descriptions.pipe';
 import { ActivatedRoutePipe } from './pipes/activated-route.pipe';
 
 
@@ -13,7 +12,6 @@ import { ActivatedRoutePipe } from './pipes/activated-route.pipe';
     FullNamePipe,
     ControlErrorMessagesPipe,
     FontSizeDirective,
-    DescriptionsPipe,
     ActivatedRoutePipe
   ],
   imports: [
@@ -23,7 +21,6 @@ import { ActivatedRoutePipe } from './pipes/activated-route.pipe';
     FullNamePipe,
     ControlErrorMessagesPipe,
     FontSizeDirective,
-    DescriptionsPipe,
     ActivatedRoutePipe
   ]
 })

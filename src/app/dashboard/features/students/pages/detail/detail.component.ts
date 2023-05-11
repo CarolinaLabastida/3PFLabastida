@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../../services/student.service';
 import { EnrollmentService } from '../../../enrollments/services/enrollment.service';
 import { NotificationsService } from 'src/app/core/services/notifications.service';
-import { Enrollment } from '../../../enrollments/models/enrollment';
+import { EnrollmentModel } from '../../../enrollments/models/enrollment';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 
@@ -15,9 +15,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnDestroy, OnInit {
-  dataSource = new MatTableDataSource<Enrollment>();
+  dataSource = new MatTableDataSource<EnrollmentModel>();
   student: Student | undefined;
   subscriptionRef: Subscription | null;
+  id;
 
   private subject$ = new Subject();
 
@@ -30,9 +31,9 @@ export class DetailComponent implements OnDestroy, OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private studentService: StudentService,
-    private enrollmentService: EnrollmentService,
     private notificationsService: NotificationsService,
   ){
+    this.id =  parseInt(this.activatedRoute.snapshot.params['id']);
     this.studentService.getStudentById(
       parseInt(this.activatedRoute.snapshot.params['id'])
     ).pipe(takeUntil(this.subject$))
@@ -45,15 +46,15 @@ export class DetailComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
-    this.enrollmentService.getEnrollmentsByStudentId(this.student?.id??0)
+    this.studentService.getEnrollmentsByStudentId(this.id)
     .subscribe({
-      next: (enrollments) => this.dataSource.data = enrollments,
+      next: (enrollments) =>{ if(enrollments) this.dataSource.data = enrollments },
       error: (e) => console.error(e),
     })
   }
 
   removeData(id: number){
-    this.enrollmentService.deleteEnrollment(id);
+    this.studentService.deleteEnrollment(id, this.id);
     this.notificationsService.createMessage('El alumno se ha desinscrito del curso')
   }
 

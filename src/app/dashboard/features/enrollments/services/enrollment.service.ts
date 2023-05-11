@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Enrollment, formDataEnrollment } from '../models/enrollment';
-import { BehaviorSubject, Observable, map, take } from 'rxjs';
+import { Enrollment, EnrollmentModel, formDataEnrollment } from '../models/enrollment';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import Swal from 'sweetalert2';
@@ -9,10 +9,8 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class EnrollmentService {
-  enrollmentsCount: number = 0;
 
-
-  private enrollments$ = new BehaviorSubject<Enrollment[] | null>(
+  private enrollments$ = new BehaviorSubject<EnrollmentModel[] | null>(
     null
   );
 
@@ -20,9 +18,9 @@ export class EnrollmentService {
 
   }
 
-  getEnrollments(): Observable<Enrollment[] | null> {
-    this.httpClient.get<Enrollment[]>(
-      `${environment.apiBaseUrl}/enrollments`
+  getEnrollments(): Observable<EnrollmentModel[] | null> {
+    this.httpClient.get<EnrollmentModel[]>(
+      `${environment.apiBaseUrl}/enrollments?_expand=course&_expand=student`
     ).subscribe({
       next: (enrollments) => {
         this.enrollments$.next(enrollments);
@@ -36,14 +34,9 @@ export class EnrollmentService {
     return this.enrollments$.asObservable();
   }
 
-  getEnrollmentById(id: number): Observable<Enrollment | null>{
-    return this.httpClient.get<Enrollment[]>(
-      `${environment.apiBaseUrl}/enrollments`, 
-      {
-        params: {
-          id: id
-        }
-      }
+  getEnrollmentById(id: number): Observable<EnrollmentModel | null>{
+    return this.httpClient.get<EnrollmentModel[]>(
+      `${environment.apiBaseUrl}/enrollments?id=${id}&_expand=course&_expand=student`, 
     ).pipe(
       map((enrollments) => enrollments[0])
     )
@@ -90,33 +83,6 @@ export class EnrollmentService {
         Swal.fire('', 'Ocurrió un error al eliminar la inscripción', 'error')
       }
     })
-  }
-
-  
-  getEnrollmentsByCourseId(id: number): Observable<Enrollment[]> {
-    return this.httpClient.get<Enrollment[]>(
-      `${environment.apiBaseUrl}/enrollments`, 
-      {
-        params: {
-          courseId: id
-        }
-      }
-    ).pipe(
-      map((enrollments) => enrollments)
-    )
-  }
-
-  getEnrollmentsByStudentId(id: number): Observable<Enrollment[]> {
-    return this.httpClient.get<Enrollment[]>(
-      `${environment.apiBaseUrl}/enrollments`, 
-      {
-        params: {
-          studentId: id
-        }
-      }
-    ).pipe(
-      map((enrollments) => enrollments)
-    )
   }
 
 }

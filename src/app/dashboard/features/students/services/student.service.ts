@@ -4,6 +4,7 @@ import { FormDataStudent, Student } from '../models/student';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
 import Swal from 'sweetalert2';
+import { Enrollment, EnrollmentModel } from '../../enrollments/models/enrollment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,10 @@ import Swal from 'sweetalert2';
 export class StudentService {
 
   private students$ = new BehaviorSubject<Student[] |null>(
+    null
+  );
+
+  private enrollments$ = new BehaviorSubject<EnrollmentModel[] | null>(
     null
   );
 
@@ -85,6 +90,36 @@ export class StudentService {
       complete: () => {},
       error: () => {
         Swal.fire('', 'Ocurrió un error al eliminar el alumno', 'error')
+      }
+    })
+  }
+
+  getEnrollmentsByStudentId(id: number): Observable<EnrollmentModel[] | null> {
+    this.httpClient.get<EnrollmentModel[]>(
+      `${environment.apiBaseUrl}/enrollments?studentId=${id}&_expand=course&_expand=student`, 
+      ).subscribe({
+        next: (enrollments) => {
+          this.enrollments$.next(enrollments);
+        },
+        complete: () => {},
+        error: () => {
+          return 'Ocurrió un error al obtener la información';
+        }
+      })
+  
+      return this.enrollments$.asObservable();
+  }
+
+  deleteEnrollment(enrollmentId: number, courseId: number): void {
+    this.httpClient.delete(
+      `${environment.apiBaseUrl}/enrollments/${enrollmentId}`
+    ).subscribe({
+      next: () => {
+        this.getEnrollmentsByStudentId(courseId);
+      },
+      complete: () => {},
+      error: () => {
+        Swal.fire('', 'Ocurrió un error al eliminar la inscripción', 'error')
       }
     })
   }
